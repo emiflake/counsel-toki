@@ -1,8 +1,33 @@
 ;;; counsel-toki.el ---  counsel support for toki pona dictionary lookup. -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2023 Emily Martins
+
+;; Author: Emily Martins <emi@haskell.fyi>
+;; Created: 29 Jun 2023
+;; URL: https://github.com/emiflake/counsel-toki
+;; Package-Version: 0.1.0
+;; Package-Requires: ((request "20230127.417") (emacs "24.4") (ivy "0.14.0"))
+
+;; This file is not part of GNU Emacs.
+
+;; This file is licensed under the Apache License, Version 2.0 (the "License");
+;; you may not use this file except in compliance with the License.
+;; You may obtain a copy of the License at
+
+;;     http://www.apache.org/licenses/LICENSE-2.0
+
+;; Unless required by applicable law or agreed to in writing, software
+;; distributed under the License is distributed on an "AS IS" BASIS,
+;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;; See the License for the specific language governing permissions and
+;; limitations under the License.
+
 ;;; Commentary:
-;;
-;; Lookup toki pona words within Emacs!
-;;
+
+;; Lookup toki pona words within Emacs, using ivy.
+;; The code word data is requested once upon evaluation and
+;; stored in `counsel-toki--data'.
+
 ;;; Code:
 
 (require 'request)
