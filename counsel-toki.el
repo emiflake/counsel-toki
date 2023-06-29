@@ -52,6 +52,7 @@
       (newline)
       (insert "- book :: " (alist-get 'book word-data))
       (newline)
+      (newline)
       (counsel-toki--insert-section "Definition"
 				    (alist-get 'en (alist-get 'def word-data)))
       (counsel-toki--insert-section "Etymology"
@@ -59,6 +60,7 @@
       (counsel-toki--insert-section "Commentary"
 				    (alist-get 'commentary word-data))
       ;; We check here because not all users may have org-mode available, so we are a bit lenient.
+      ;; Ultimately the file is readable without org-mode, too.
       (when (fboundp #'org-mode)
 	(org-mode)))))
 

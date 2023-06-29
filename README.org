@@ -1,0 +1,10 @@
+* counsel-toki
+
+[[https://github.com/abo-abo/swiper][ivy]] based searching in toki pona word dictionary.
+
+Inspired by [[https://nimi.li/][nimi.li]].
+
+* Data source
+
+Words are fetched from [[https://linku.la/about/jasima/][jasima Linku]]. Perhaps an option should be provided to fall back to a hardcoded set of words, though.
+
