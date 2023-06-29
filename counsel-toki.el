@@ -1,4 +1,4 @@
-;;; counsel-toki.el ---  counsel support for toki pona dictionary lookup. -*- lexical-binding: t; -*-
+;;; counsel-toki.el ---  Counsel support for toki pona dictionary lookup -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023 Emily Martins
 
@@ -6,7 +6,7 @@
 ;; Created: 29 Jun 2023
 ;; URL: https://github.com/emiflake/counsel-toki
 ;; Package-Version: 0.1.0
-;; Package-Requires: ((request "20230127.417") (emacs "24.4") (ivy "0.14.0"))
+;; Package-Requires: ((request "0.3.3") (emacs "25.1") (ivy "0.14.0"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -49,7 +49,7 @@
 	  (alist-get 'en (alist-get 'def word-data))))
 
 (defun counsel-toki--function ()
-  "Get counsel lines for counsel-toki."
+  "Get counsel lines for `counsel-toki'."
   (mapcar #'counsel-toki--word-line (alist-get 'data counsel-toki--data)))
 
 (defun counsel-toki--insert-section (subtitle value)
