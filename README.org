@@ -4,7 +4,17 @@
 
 Inspired by [[https://nimi.li/][nimi.li]].
 
+* Screenshots
+
+#+HTML: <p align="center"> <img src="https://paste.super.fish/T35tRR.png" alt="Counsel Search" /> </p>
+#+HTML: <p align="center"> Counsel Search </p>
+#+HTML: <p align="center"> <img src="https://paste.super.fish/P1IL7w.png" alt="Search Result Buffer" /> </p>
+#+HTML: <p align="center"> Search Result Buffer <br />  </p>
+
 * Data source
 
 Words are fetched from [[https://linku.la/about/jasima/][jasima Linku]]. Perhaps an option should be provided to fall back to a hardcoded set of words, though.
 
+* Caveats
+
+The search result buffer requires ~org-mode~ and ~org~ in order to render as nicely as in the screenshot.
