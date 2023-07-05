@@ -37,20 +37,29 @@
   nil
   "The parsed word data as found on `https://linku.la/jasima/data.json'.")
 
-(request "https://linku.la/jasima/data.json"
-  :parser 'json-read
-  :success (cl-function
-             (lambda (&key data &allow-other-keys)
-               (setq counsel-toki--data data))))
+(defun counsel-toki--get-data ()
+  "Get the JSON data from the dictionary."
+  (if counsel-toki--data
+      counsel-toki--data
+    (if (yes-or-no-p "Making a request to https://linku.la/jasima/data.json for counsel-toki.  Is this okay?")
+	(progn (request "https://linku.la/jasima/data.json"
+		   :parser 'json-read
+		   :sync t
+		   :success (cl-function
+			     (lambda (&key data &allow-other-keys)
+			       (setq counsel-toki--data data))))
+	       counsel-toki--data)
+      'nil)))
 
 (defun counsel-toki--word-line (word-data)
   "Get the line contents given by WORD-DATA."
-  (format "%s - %s" (alist-get 'word word-data)
-    (alist-get 'en (alist-get 'def word-data))))
+  (format "%s - %s"
+	  (alist-get 'word word-data)
+	  (alist-get 'en (alist-get 'def word-data))))
 
 (defun counsel-toki--function ()
   "Get counsel lines for `counsel-toki'."
-  (mapcar #'counsel-toki--word-line (alist-get 'data counsel-toki--data)))
+  (mapcar #'counsel-toki--word-line (alist-get 'data (counsel-toki--get-data))))
 
 (defun counsel-toki--insert-section (subtitle value)
   "Insert a section with SUBTITLE, populated with VALUE."
@@ -66,7 +75,7 @@
   "Open a buffer with information about the word in WORD-LINE."
   (interactive)
   (let* ((word (replace-regexp-in-string " -.*" "" word-line))
-          (word-data (alist-get (intern word) (alist-get 'data counsel-toki--data))))
+	 (word-data (alist-get (intern word) (alist-get 'data (counsel-toki--get-data)))))
     (with-current-buffer (get-buffer-create word-line)
       (erase-buffer)
       (switch-to-buffer (current-buffer))
@@ -79,22 +88,22 @@
       (newline)
       (newline)
       (counsel-toki--insert-section "Definition"
-        (alist-get 'en (alist-get 'def word-data)))
+				    (alist-get 'en (alist-get 'def word-data)))
       (counsel-toki--insert-section "Etymology"
-        (alist-get 'etymology word-data))
+				    (alist-get 'etymology word-data))
       (counsel-toki--insert-section "Commentary"
-        (alist-get 'commentary word-data))
+				    (alist-get 'commentary word-data))
       (org-mode))))
 
 (defun counsel-toki (&optional initial-input)
   "Search for toki pona words with INITIAL-INPUT."
   (interactive)
-  (if counsel-toki--data
-    (ivy-read "o alasa e nimi: "
-      (counsel-toki--function)
-      :action #'counsel-toki--action
-      :initial-input initial-input)
-    (message "counsel-toki has not yet loaded the data. See the variable `counsel-toki--data'.")))
+  (if (counsel-toki--get-data)
+      (ivy-read "o alasa e nimi: "
+		(counsel-toki--function)
+		:action #'counsel-toki--action
+		:initial-input initial-input)
+    (message "Unable to use counsel-toki without making a request.")))
 
 (provide 'counsel-toki)
 
