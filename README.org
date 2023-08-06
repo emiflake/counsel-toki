@@ -1,8 +1,12 @@
-* counsel-toki
+* counsel-toki [[https://melpa.org/#/counsel-toki][file:https://melpa.org/packages/counsel-toki-badge.svg]]
 
 [[https://github.com/abo-abo/swiper][ivy]] based searching in toki pona word dictionary.
 
 Inspired by [[https://nimi.li/][nimi.li]].
+
+* Installation
+
+counsel-toki is available on [[https://melpa.org/#/counsel-toki][MELPA]].
 
 * Screenshots
 
